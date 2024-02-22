@@ -1,53 +1,38 @@
-import styled from 'styled-components';
-import GlobalStyles from '../styles/GlobalStyles';
-import Button from '../ui/Button';
-import Input from '../ui/Input';
-import Heading from '../ui/Heading';
-import Row from '../ui/Row';
-
-// only available in this component
-const H1 = styled.h1`
-  font-size: 30px;
-  font-weight: 600;
-  background-color: yellow;
-`;
-
-const StyledApp = styled.div`
-  /* background-color: orange; */
-  padding: 20px;
-`;
+import { Routes, BrowserRouter, Route, Navigate } from 'react-router-dom';
+import Dashboard from '../pages/Dashboard';
+import Bookings from '../pages/Bookings';
+import Cabins from '../pages/Cabins';
+import Users from '../pages/Users';
+import Settings from '../pages/Settings';
+import Account from '../pages/Account';
+import Login from '../pages/Login';
+import PageNotFound from '../pages/PageNotFound';
+import GlobalStyle from '../styles/GlobalStyles';
+import AppLayout from '../ui/AppLayout';
+import { Children } from 'react';
 
 function App() {
   return (
     <>
-      <GlobalStyles />
-      <StyledApp>
-        <Row>
-          <Row type='horizontal'>
-            <Heading type='h1'>The Wild Oasis</Heading>
+      <GlobalStyle />
+      <BrowserRouter>
+        <Routes>
+          <Route element={<AppLayout />}>
+            <Route index element={<Navigate replace to='dashboard' />} />
+            <Route path='dashboard' element={<Dashboard />} />
+            <Route path='booking' element={<Bookings />} />
+            <Route path='cabins' element={<Cabins />} />
+            <Route path='users' element={<Users />} />
+            <Route path='setting' element={<Settings />} />
+            <Route path='account' element={<Account />} />
+          </Route>
 
-            <div>
-              <Heading as='h2'>Check in and out</Heading>
-              <Button onClick={() => alert('Check in')}>Check In</Button>
-              <Button
-                variations='secondary'
-                size='medium'
-                onClick={() => alert('Check out')}
-              >
-                Check Out
-              </Button>
-            </div>
-          </Row>
-
-          <Row>
-            <Heading as='h3'>Form</Heading>
-            <form>
-              <Input type='number' placeholder='Number of Guests'></Input>
-            </form>
-          </Row>
-        </Row>
-      </StyledApp>
+          <Route path='login' element={<Login />} />
+          <Route path='*' element={<PageNotFound />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
+
 export default App;

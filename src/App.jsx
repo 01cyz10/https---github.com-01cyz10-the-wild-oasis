@@ -13,6 +13,7 @@ import PageNotFound from '../pages/PageNotFound';
 import GlobalStyle from '../styles/GlobalStyles';
 import AppLayout from '../ui/AppLayout';
 
+// integrate the react-query
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
